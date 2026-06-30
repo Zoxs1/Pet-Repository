@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Studio Mobile</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="mobile-shell">
+      <header class="mobile-header">
+        <div class="mobile-topbar">
+          <div class="brand-row">
+            <div class="brand-mark">PS</div>
+            <div>
+              <h1>Pet Studio</h1>
+              <p id="runtimeText">Cargando entorno...</p>
+            </div>
+          </div>
+          <button id="mobileMenuButton" class="mobile-menu-button" type="button" aria-label="Abrir menu">Menu</button>
+        </div>
+
+        <nav id="mobileTabBar" class="mobile-tab-bar" aria-label="Secciones mobile">
+          <button class="active" type="button" data-mobile-tab="mascota">Mascota</button>
+          <button type="button" data-mobile-tab="animaciones">Animaciones</button>
+          <button type="button" data-mobile-tab="editor">Editor</button>
+          <button type="button" data-mobile-tab="frames">Frames</button>
+        </nav>
+      </header>
+
+      <section id="workspace" class="workspace">
+        <div id="stageWrap" class="stage-wrap">
+          <canvas id="stage" width="360" height="280"></canvas>
+        </div>
+
+        <div id="editorResizeHandle" class="editor-resize-handle"></div>
+
+        <footer class="editor mobile-tab-content">
+          <section class="mobile-tab-panel active" data-mobile-panel="mascota">
+            <section class="mobile-card pet-card">
+              <label>
+                Mascota
+                <select id="petSelect" class="field"></select>
+              </label>
+              <button id="reloadPetButton" class="primary-button">Lanzar</button>
+            </section>
+
+            <section class="playback-strip">
+              <div>
+                <h2 id="petName">Sin mascota</h2>
+                <p id="animationMeta">Esperando datos</p>
+              </div>
+              <div class="toolbar">
+                <button id="playButton" class="icon-button">Play</button>
+                <button id="loopButton" class="icon-button">Bucle</button>
+                <button id="autoPlayButton" class="icon-button">Siempre</button>
+                <button id="restartButton" class="icon-button">Reiniciar</button>
+                <button id="editorToggleButton" class="icon-button active">Editor</button>
+                <button id="savePetButton" class="icon-button">Guardar</button>
+                <button id="deletePetButton" class="icon-button danger-button">Eliminar</button>
+              </div>
+            </section>
+          </section>
+
+          <section class="mobile-tab-panel" data-mobile-panel="animaciones">
+            <section class="mobile-card animation-card">
+              <h2>Animaciones</h2>
+              <div id="animationList" class="animation-list"></div>
+            </section>
+          </section>
+
+          <section class="mobile-tab-panel" data-mobile-panel="editor">
+            <section class="editor-panel">
+              <h3>Modo simple</h3>
+              <label>
+                <span class="label-row">
+                  <span>Escala</span>
+                  <output id="scaleValue">0.75x</output>
+                </span>
+                <input id="scaleInput" type="range" min="0.25" max="2" step="0.05" value="0.75">
+              </label>
+              <label>
+                <span class="label-row">
+                  <span>FPS</span>
+                  <output id="fpsValue">24</output>
+                </span>
+                <input id="fpsInput" type="range" min="1" max="60" step="1" value="24">
+              </label>
+              <label class="check-row">
+                <input id="applyAllToggle" type="checkbox">
+                Aplicar a todas
+              </label>
+              <label class="check-row">
+                <input id="ghostToggle" type="checkbox" checked>
+                Ver referencia
+              </label>
+              <label>
+                Referencia
+                <select id="ghostSelect" class="field"></select>
+              </label>
+            </section>
+
+            <section class="editor-panel">
+              <h3>Modo avanzado</h3>
+              <label>
+                Nombre visible
+                <input id="animationLabelInput" type="text" value="">
+              </label>
+              <div class="sound-control">
+                <span>Carpetas</span>
+                <div class="sound-row">
+                  <select id="soundFolderSelect" class="field"></select>
+                  <button id="createSoundFolderButton" class="mini-button" type="button" title="Crear carpeta">+</button>
+                </div>
+              </div>
+              <div class="sound-control">
+                <span>Sonido</span>
+                <div class="sound-row">
+                  <select id="soundSelect" class="field"></select>
+                  <button id="importSoundButton" class="mini-button" type="button" title="Importar sonido">...</button>
+                  <button id="moveSoundButton" class="mini-button text-mini-button" type="button" title="Mover sonidos">Mover</button>
+                </div>
+              </div>
+              <label class="check-row">
+                <input id="syncSoundToggle" type="checkbox">
+                Sincronizar con sonido
+              </label>
+              <label>
+                Frame
+                <input id="frameInput" type="range" min="0" max="0" step="1" value="0">
+              </label>
+              <div class="number-grid">
+                <label>
+                  X animacion
+                  <input id="animOffsetX" type="number" value="0">
+                </label>
+                <label>
+                  Y animacion
+                  <input id="animOffsetY" type="number" value="0">
+                </label>
+                <label>
+                  X frame
+                  <input id="frameOffsetX" type="number" value="0">
+                </label>
+                <label>
+                  Y frame
+                  <input id="frameOffsetY" type="number" value="0">
+                </label>
+              </div>
+              <button id="resetOffsetsButton" class="secondary-button">Reset offsets</button>
+            </section>
+          </section>
+
+          <section class="mobile-tab-panel" data-mobile-panel="frames">
+            <section class="editor-panel frame-panel">
+              <h3>Frames</h3>
+              <div id="frameStrip" class="frame-strip"></div>
+            </section>
+
+            <section class="editor-panel action-panel">
+              <h3>Acciones</h3>
+              <div id="actionMappingList" class="action-mapping-list"></div>
+            </section>
+          </section>
+        </footer>
+      </section>
+    </main>
+
+    <div id="mobileMenuOverlay" class="mobile-menu-overlay" hidden></div>
+    <aside id="mobileMenuPanel" class="mobile-menu-panel" hidden>
+      <header class="mobile-menu-header">
+        <div>
+          <h2>Menu</h2>
+          <p>Acciones del editor mobile</p>
+        </div>
+        <button id="mobileMenuCloseButton" class="icon-button" type="button">Cerrar</button>
+      </header>
+
+      <section class="mobile-menu-section">
+        <h3>Mascota</h3>
+        <button type="button" data-mobile-action="launch-pet">Lanzar</button>
+        <button type="button" data-mobile-action="reload-pet">Recargar</button>
+        <button type="button" data-mobile-action="save-pet">Guardar</button>
+        <button type="button" data-mobile-action="delete-pet" class="danger-button">Eliminar</button>
+      </section>
+
+      <section class="mobile-menu-section">
+        <h3>Importar</h3>
+        <button type="button" data-mobile-action="import-pet-package">Paquete completo</button>
+        <button type="button" data-mobile-action="import-individual-images">Imagenes individuales</button>
+        <button type="button" data-mobile-action="import-spritesheet-xml">Spritesheet and XML</button>
+      </section>
+
+      <section class="mobile-menu-section">
+        <h3>Exportar</h3>
+        <button type="button" data-mobile-action="export-pet-package">Paquete completo</button>
+        <button type="button" data-mobile-action="export-spritesheet-xml">Spritesheet and XML</button>
+        <button type="button" data-mobile-action="export-individual-images">Imagenes individuales</button>
+      </section>
+
+      <section class="mobile-menu-section">
+        <h3>Herramientas</h3>
+        <button type="button" data-mobile-action="open-sprite-cutter">Recortador de frames</button>
+        <button type="button" data-mobile-action="open-prompts">Promts</button>
+        <button type="button" data-mobile-action="toggle-editor">Mostrar/Ocultar editor</button>
+        <button type="button" data-mobile-action="reset-camera">Reiniciar camara</button>
+      </section>
+
+      <section class="mobile-menu-section">
+        <h3>Desarrollo</h3>
+        <button type="button" data-mobile-action="show-pet-status">Validar mascotas</button>
+        <button type="button" data-mobile-action="show-about">Acerca de</button>
+      </section>
+    </aside>
+
+    <script src="../shared/editor-renderer.js"></script>
+  </body>
+</html>

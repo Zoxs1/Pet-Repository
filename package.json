@@ -1,0 +1,18 @@
+{
+  "name": "pet-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dev lab for creating and previewing desktop pets.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node tools/start-dev.js",
+    "mobile": "node tools/start-mobile.js",
+    "validate:fixtures": "node tools/validate-fixtures.js"
+  },
+  "devDependencies": {
+    "electron": "^28.3.3"
+  },
+  "dependencies": {
+    "@imgly/background-removal-node": "^1.4.5"
+  }
+}

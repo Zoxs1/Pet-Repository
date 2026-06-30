@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Studio Dev</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">PS</div>
+          <div>
+            <h1>Pet Studio</h1>
+            <p id="runtimeText">Cargando entorno...</p>
+          </div>
+        </div>
+
+        <section class="panel">
+          <h2>Mascota</h2>
+          <select id="petSelect" class="field"></select>
+          <button id="reloadPetButton" class="primary-button">Lanzar</button>
+        </section>
+
+        <section class="panel animation-panel">
+          <h2>Animaciones</h2>
+          <div id="animationList" class="animation-list"></div>
+        </section>
+      </aside>
+
+      <section id="workspace" class="workspace">
+        <header class="topbar">
+          <div>
+            <h2 id="petName">Sin mascota</h2>
+            <p id="animationMeta">Esperando datos</p>
+          </div>
+          <div class="toolbar">
+            <button id="playButton" class="icon-button" title="Reproducir o pausar">Play</button>
+            <button id="loopButton" class="icon-button" title="Repetir la animacion actual">Bucle</button>
+            <button id="autoPlayButton" class="icon-button" title="Mantener reproduccion al cambiar de animacion">Siempre activo</button>
+            <button id="restartButton" class="icon-button" title="Reiniciar animacion">Reiniciar</button>
+            <button id="editorToggleButton" class="icon-button active" title="Mostrar u ocultar editor">Editor</button>
+            <button id="savePetButton" class="icon-button" title="Guardar cambios en pet.json">Guardar</button>
+            <button id="deletePetButton" class="icon-button danger-button" title="Eliminar por completo la mascota">Eliminar</button>
+          </div>
+        </header>
+
+        <div id="stageWrap" class="stage-wrap">
+          <canvas id="stage" width="720" height="520"></canvas>
+        </div>
+
+        <div id="editorResizeHandle" class="editor-resize-handle" title="Arrastra para cambiar el alto del editor"></div>
+
+        <footer class="editor">
+          <section class="editor-panel">
+            <h3>Modo simple</h3>
+            <label>
+              <span class="label-row">
+                <span>Escala</span>
+                <output id="scaleValue">0.75x</output>
+              </span>
+              <input id="scaleInput" type="range" min="0.25" max="2" step="0.05" value="0.75">
+            </label>
+            <label>
+              <span class="label-row">
+                <span>FPS</span>
+                <output id="fpsValue">24</output>
+              </span>
+              <input id="fpsInput" type="range" min="1" max="60" step="1" value="24">
+            </label>
+            <label class="check-row">
+              <input id="applyAllToggle" type="checkbox">
+              Aplicar a todas
+            </label>
+            <label class="check-row">
+              <input id="ghostToggle" type="checkbox" checked>
+              Ver referencia
+            </label>
+            <label>
+              Referencia
+              <select id="ghostSelect" class="field"></select>
+            </label>
+          </section>
+
+          <section class="editor-panel">
+            <h3>Modo avanzado</h3>
+            <label>
+              Nombre visible
+              <input id="animationLabelInput" type="text" value="">
+            </label>
+            <div class="sound-control">
+              <span>Carpetas</span>
+              <div class="sound-row">
+                <select id="soundFolderSelect" class="field"></select>
+                <button id="createSoundFolderButton" class="mini-button" type="button" title="Crear carpeta">+</button>
+              </div>
+            </div>
+            <div class="sound-control">
+              <span>Sonido</span>
+              <div class="sound-row">
+                <select id="soundSelect" class="field"></select>
+                <button id="importSoundButton" class="mini-button" type="button" title="Importar sonido">...</button>
+                <button id="moveSoundButton" class="mini-button text-mini-button" type="button" title="Mover sonidos">Mover</button>
+              </div>
+            </div>
+            <label class="check-row">
+              <input id="syncSoundToggle" type="checkbox">
+              Sincronizar con sonido
+            </label>
+            <label>
+              Frame
+              <input id="frameInput" type="range" min="0" max="0" step="1" value="0">
+            </label>
+            <div class="number-grid">
+              <label>
+                X animacion
+                <input id="animOffsetX" type="number" value="0">
+              </label>
+              <label>
+                Y animacion
+                <input id="animOffsetY" type="number" value="0">
+              </label>
+              <label>
+                X frame
+                <input id="frameOffsetX" type="number" value="0">
+              </label>
+              <label>
+                Y frame
+                <input id="frameOffsetY" type="number" value="0">
+              </label>
+            </div>
+            <button id="resetOffsetsButton" class="secondary-button">Reset offsets</button>
+          </section>
+
+          <section class="editor-panel frame-panel">
+            <h3>Frames</h3>
+            <div id="frameStrip" class="frame-strip"></div>
+          </section>
+
+          <section class="editor-panel action-panel">
+            <h3>Acciones</h3>
+            <div id="actionMappingList" class="action-mapping-list"></div>
+          </section>
+        </footer>
+      </section>
+    </main>
+
+    <script src="../shared/editor-renderer.js"></script>
+  </body>
+</html>
